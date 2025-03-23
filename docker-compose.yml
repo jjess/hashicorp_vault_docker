@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_ADDR: "https://ubuntuserver3:8200"
+    volumes:
+      - ./vault:/vault
+      - ./config:/etc/vault.d
+    entrypoint: vault server -config=/etc/vault.d/vault.hcl
+
+volumes:
+  vault:
+    driver: local
